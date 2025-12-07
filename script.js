@@ -29,23 +29,23 @@
 			"type": "function"
 		}
 	];
+
 // При подключении к Mmask
 	if (window.ethereum) {
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		const signer = provider.getSigner();
 		
 		const contract = new ethers.Contract(contractAddress, contractAbi, signer);
-
 	document.getElementById('setMessageButton').onclick = async () => {
 		const message = document.getElementById('messageInput').value;
 		await contract.setMessage(message);
 		alert('Сообщение установлено!');
 	};
+		
 	document.getElementById('getMessageButton').onclick = async () => {
 		const message = await contract.getMessage();
 		document.getElementById('messageDisplay').innerText = message;
 	};
 } else {
 	alert('Установите MMask или другой кошелек.');
-
 }
